@@ -1,5 +1,5 @@
 import axios from "axios"
-import { fetchFail, fetchStart, loginSuccess } from "../features/authSlice";
+import { fetchFail, fetchStart, loginSuccess, logoutSuccess } from "../features/authSlice";
 import { useDispatch } from "react-redux";
 
 
@@ -18,7 +18,20 @@ const useAuthCall = () => {
             dispatch(fetchFail())     
         }
     };
-  return  {login}
+
+    
+      const logout = async() => {
+            dispatch(fetchStart())
+            try {
+                await axios.post(`${BASE_URL}account/auth/logout/`);
+                dispatch(logoutSuccess())
+            } catch (error) {
+                console.log(error);   
+                dispatch(fetchFail())     
+            }
+        };
+
+  return  {login, logout}
 }
 
 export default useAuthCall
