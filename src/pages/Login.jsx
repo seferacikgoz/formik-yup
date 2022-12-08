@@ -9,12 +9,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { useSelector } from "react-redux";
 import { TextField } from "@mui/material";
+import LoadingButton from '@mui/lab/LoadingButton';
 
 const loginSchema = {}
 
 const Login = () => {
   const navigate = useNavigate();
-  const { currentUser, error } = useSelector((state) => state?.auth);
+  const { currentUser, error, loading } = useSelector((state) => state?.auth);
 
   return (
     <Container maxWidth="lg">
@@ -91,7 +92,9 @@ const Login = () => {
               values,
               isSubmitting,
               handleChange,
-              handleBlur
+              handleBlur,
+              touched,
+              errors
             }) => (
               <Form>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -102,8 +105,32 @@ const Login = () => {
                     type="email"
                     variant="outlined"
                     value={values.email}
-                    onChange={handleChange}                    
+                    onChange={handleChange}  
+                    onBlur={handleBlur}
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}                  
                   />
+
+                  <TextField
+                    label="Password"
+                    name="password"
+                    id="password"
+                    type="password"
+                    variant="outlined"
+                    value={values.password}
+                    onChange={handleChange}  
+                    onBlur={handleBlur}
+                    error={touched.password && Boolean(errors.password)}
+                    helperText={touched.password && errors.password}                  
+                  />
+                  <LoadingButton 
+                  type="submit" 
+                  loading={loading} 
+                  loadingPosition="center"
+                  variant="contained"
+                  >
+                    Submit
+                  </LoadingButton>
                   
                 </Box>
               </Form>
