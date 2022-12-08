@@ -10,8 +10,16 @@ import { Formik, Form } from "formik";
 import { useSelector } from "react-redux";
 import { TextField } from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
+import * as yup from 'yup';
 
-const loginSchema = {}
+const loginSchema = yup.object().shape({
+  email: yup.string().
+  email("Please enter valid email").
+  required("Please enter an email"),
+  password:yup.string().
+  required("Please enter a password").
+  min(8,"Password must have min 8 chars")
+  });
 
 const Login = () => {
   const navigate = useNavigate();
