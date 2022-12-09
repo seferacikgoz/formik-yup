@@ -1,3 +1,6 @@
+![sadasfa](https://user-images.githubusercontent.com/102485608/206704523-2570308f-e6fd-49ad-9b7c-bae766ecb2e9.gif)
+
+
 # Redux Toolkit Ornegi
 
 ## `Kurulum`
